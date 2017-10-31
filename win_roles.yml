@@ -1,9 +1,8 @@
 ---
- - hosts: all 
+- hosts: all 
 
-   vars_files:
-       - versions.yml
-       - urls.yml
-
-   roles:
-       - roger_win
+  vars_files:
+    - ./versions.yml
+    - ./urls.yml
+  roles:
+    - roger_win
