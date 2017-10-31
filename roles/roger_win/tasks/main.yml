@@ -1,2 +1,2 @@
 ---
-- import_tasks: ../../playbooks/windows/firefox.yml
+  - import_tasks: ../../playbooks/windows/firefox.yml
