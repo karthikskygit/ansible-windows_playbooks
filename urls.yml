@@ -1,0 +1,8 @@
+#download URLs
+win_url: http://139.182.135.18/windows/package/
+mac_url: http://139.182.135.18/macos/package/
+fedora_url: http://139.182.135.18/fedora/package/
+mac_script_url: http://139.182.135.18/macos/script/
+miktex_dir: \\139.182.135.15\miktex
+
+# vim:ft=ansible:
