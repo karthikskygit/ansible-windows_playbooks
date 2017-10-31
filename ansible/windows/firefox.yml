@@ -1,0 +1,37 @@
+---
+- name: Mozilla Firefox
+  hosts: all
+  tasks:
+
+  - name: Check if Firefox is installed
+    win_stat:
+      path: C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+    register: app
+
+  - block:
+    - name: Check installed Firefox version
+      win_file_version:
+        path: C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+      register: current_version
+
+    - name: Compare current Firefox version
+      win_shell: '[System.Version]"{{ current_version.win_file_version.product_version }}" -lt [System.Version]"56.0.1" | write-host -nonewline'
+      register: result
+    when: app.stat.exists == True
+
+  - block:
+    - name: download firefox exe file
+      win_get_url:
+        url: "http://139.182.135.18/windows/package/Firefox_56.0.1.exe"
+        dest: C:\windows\ansible\Firefox.exe
+        force: yes
+    - name: install firefox
+      win_shell: C:\windows\ansible\Firefox.exe -ms
+    - name: delete firefox installation exe file
+      win_file:
+        path: C:\windows\ansible\Firefox.exe
+        state: absent
+    when: app.stat.exists == False or result.stdout == "True"
+...
+# vim:ft=ansible:
+#
